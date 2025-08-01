@@ -1,33 +1,38 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-const CustomCursor = () => {
+const CustomCursor = ({ label }) => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
   useEffect(() => {
-    if (window.innerWidth < 1024) return; // no aplicar en mobile
-
-    const cursor = document.createElement("div");
-    cursor.style.position = "fixed";
-    cursor.style.width = "12px";
-    cursor.style.height = "12px";
-    cursor.style.borderRadius = "50%";
-    cursor.style.background = "#000";
-    cursor.style.pointerEvents = "none";
-    cursor.style.zIndex = "9999";
-    cursor.style.transform = "translate(-50%, -50%)";
-    document.body.appendChild(cursor);
+    if (window.innerWidth < 1024) return;
 
     const move = (e) => {
-      cursor.style.left = `${e.clientX}px`;
-      cursor.style.top = `${e.clientY}px`;
+      setPosition({ x: e.clientX, y: e.clientY });
     };
 
     window.addEventListener("mousemove", move);
-    return () => {
-      window.removeEventListener("mousemove", move);
-      document.body.removeChild(cursor);
-    };
+    return () => window.removeEventListener("mousemove", move);
   }, []);
 
-  return null;
+  if (window.innerWidth < 1024) return null;
+
+  return (
+    <div
+      className="fixed pointer-events-none z-[9999] flex items-center"
+      style={{
+        top: position.y,
+        left: position.x,
+        transform: "translateY(-50%)",
+      }}
+    >
+      <div className="w-3 h-3 bg-black rounded-full" />
+      {label && (
+        <span className="ml-2 text-lg text-black select-none whitespace-nowrap">
+          {label}
+        </span>
+      )}
+    </div>
+  );
 };
 
 export default CustomCursor;
