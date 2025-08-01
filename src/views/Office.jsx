@@ -1,34 +1,41 @@
 const Office = () => {
   return (
-    <main className="mt-[20vh] px-3 ">
+    <main className="pt-[20vh] px-5 page-fade-in">
       {/* Office info */}
       <section className="mb-20 grid grid-cols-1 lg:grid-cols-5 gap-3">
-        <div className="flex uppercase text-left "></div>
+        <div className="flex uppercase text-left ">Descripción</div>
         <div className="grid grid-cols-1 gap-3 lg:col-span-3">
           <p className="text-left ">
-            FKS Arquitectos es una oficina de arquitectura ubicada en Santiago
-            de Chile formada el año 2010. Ha desarrollando diversos proyectos
-            públicos y privados tanto en Chile como en el extranjero. Su trabajo
-            ha sido reconocido con los premios Design Vanguard 2017 de
-            Architectural Record, y el Design Award 2013, 2018 y 2020 de
-            Wallpaper Magazine. Ha ganado diversos concursos públicos, entre
-            ellos el diseño para el Museo Regional de Atacama (Copiapó), los
-            Centros de Visitantes para el Parque Nacional Laguna San Rafael, la
-            Reserva Jeinimeni (Aysén), y la Biblioteca, archivo y depósito
-            Regional de Los Ríos (Valdivia). Sus proyectos han sido publicados
-            en distintos medios internacionales, entre ellos: A+U (Japón), GA
-            (Japón), Mark (Holanda), Wallpaper (Inglaterra), Architectural
-            Record (EEUU), PLOT (Argentina), 2G (España), Baumeister (Alemania),
-            Interni (Italia), y ha sido motivo de la edición de dos
-            publicaciones monográficas: &quot;FKS Arquitectos, Pista de
-            Despegue&quot;, de Editorial Constructo, Chile, 2015, y &quot;Max
-            Núñez Arquitectos, Colección de Ideas&quot;, de Editorial ARQ,
-            Chile, 2018.
+            Studio FKS es una oficina de arquitectura con base en Santiago de
+            Chile, fundada por Juan Pablo Fuentes, Tomás Keymer y Andrés
+            Sanfuentes. Diseñamos y desarrollamos proyectos de alto estándar en
+            distintas escalas: master plans, arquitectura residencial, edificios
+            y muebles. Garantizamos la máxima calidad desde la etapa conceptual
+            hasta la obra construida, integrando siempre la visión del cliente.
+            Nuestro enfoque combina precisión técnica, sensibilidad territorial
+            y un fuerte compromiso con la materialidad, el contexto y el oficio
+            arquitectónico. Abordamos cada encargo como una oportunidad para
+            explorar nuevas formas de habitar, a través de una metodología
+            colaborativa y un proceso de diseño riguroso. Nos interesa
+            establecer relaciones duraderas con los clientes, entendiendo sus
+            necesidades y aspiraciones como el punto de partida de soluciones
+            arquitectónicas únicas y significativas. La experiencia acumulada
+            por los socios en oficinas nacionales e internacionales nos permite
+            operar con una mirada crítica, contemporánea y multidisciplinaria.
           </p>
         </div>
       </section>
+
+      {/* Office image */}
+      {/* <section className="mb-20 grid grid-cols-1 lg:grid-cols-5 gap-3">
+        <div className="flex uppercase text-left ">Equipo</div>
+        <div className="grid grid-cols-1 gap-3 lg:col-span-3">
+          <img src="/public/placeholder.webp" alt="studio_fks" />
+        </div>
+      </section> */}
+
       {/* Recognitions */}
-      <section className="grid grid-cols-1 lg:grid-cols-5 gap-3 mb-20">
+      {/* <section className="grid grid-cols-1 lg:grid-cols-5 gap-3 mb-20">
         <div></div>
         <div className="col-span-3">
           <div className="uppercase text-left col-span-1 mb-3">
@@ -64,134 +71,103 @@ const Office = () => {
           </div>
         </div>
         <div className="col-span-2"></div>
-      </section>
+      </section> */}
 
       {/* Team */}
       <section className="mb-20">
-        {/* Max Nunez */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-3">
-          <div className="flex uppercase text-left"></div>
-          <div className="flex flex-col text-left lg:col-span-4">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 h-fit-content">
-              {/* MAX NUNEZ */}
-              <div className="col-span-3 flex flex-col justify-between">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-5">
+          <div className="text-left uppercase col-span-1">Equipo</div>
+
+          <div className="lg:col-span-3">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+              {/* Fuentes */}
+              <div className="flex flex-col justify-between">
                 <div>
-                  <p className="uppercase">Socio Fundador</p>{" "}
-                  <p className="mb-3 uppercase">Max Nunez Bancalari</p>
-                  <p className="">
-                    Arquitecto y Magister en Arquitectura de la Universidad
-                    Católica de Chile en el 2004. El Año 2010 obtuvo un MSc in
-                    Advanced Architectural Design de la Universidad de Columbia,
-                    Nueva York, donde recibió el Lucille Smyser Lowenfish
-                    Memorial Prize y el William Ware Prize for Excellence in
-                    Design. Entre el 2005 y el 2010 trabajó asociado a Nicolás
-                    del Río en dRN Arquitectos, y desde el 2010 dirige FKS
-                    Arquitectos. Ha sido invitado a presentar su trabajo en
-                    diversas bienales y universidades de Chile, América y
-                    Europa. En paralelo a su trabajo profesional, entre los años
-                    2016 y 2020, fue Jefe de Programa del Magíster en
-                    Arquitectura de la Universidad Católica, donde es profesor
-                    de Taller de manera regular. Los años 2018 y 2019 fue
-                    profesor invitado a la Universidad IUAV de Venecia, Italia.
+                  <p className="text-left mb-3 uppercase">Juan Pablo Fuentes</p>
+                  <p className="text-left">
+                    Juan Pablo Fuentes Garcés se tituló de arquitecto en la
+                    Pontificia Universidad Católica de Chile en 2021, donde
+                    también obtuvo el grado de magíster en Arquitectura con
+                    distinción máxima. Entre 2022 y 2024 trabajó en Combeau
+                    Arquitectura, en colaboración con Studio Caban (Tucson,
+                    Arizona), participando en el desarrollo de proyectos
+                    hoteleros como el Four Seasons Riviera Maya y Six Senses
+                    Xala (México). Participó en el desarrollo de masterplans,
+                    diseño de habitaciones , restaurantes, espacios de llegada y
+                    documentación arquitectónica. Actualmente también trabaja en
+                    Ehvert Engineering, consultora de ingeniería estadounidense,
+                    en coordinación BIM para Data Centers, participando en la
+                    revisión de diseños, presupuestos, estimación de costos y
+                    calendarios de obra.
                   </p>
-                </div>
-                <div className="mt-6">
-                  <img
-                    className="w-full md:w-1/2"
-                    src="/maxnunez.webp"
-                    alt="maxnunez"
-                  />
                 </div>
               </div>
-              <div></div>
 
-              {/* STEFANO ROLLA */}
-              <div className="col-span-3 flex flex-col justify-between mt-20">
+              {/* Keymer */}
+              <div className="flex flex-col justify-between">
                 <div>
-                  <p className="uppercase">Socio</p>{" "}
-                  <p className="mb-3 uppercase">Stefano Rolla</p>
-                  <p className="">
-                    Se graduó de Arquitecto en el Politécnico de Milán en el
-                    2005, con una tesis desarrollada en conjunto con la
-                    Universidad de Buenos Aires. Desde el año 2006 vive y
-                    trabaja en Chile, de forma independiente y colaborando con
-                    varias oficinas de Arquitectura, entre otras Guillermo Acuña
-                    Arquitectos Asociados y FKS Arquitectos. Actualmente es
-                    profesor de Taller IV de la Universidad San Sebastián y ha
-                    sido profesor de Teoría, Historia y Crítica de la
-                    Arquitectura en la Universidad Católica de Chile. Desde 2018
-                    es socio de FKS Arquitectos.
+                  <p className="text-left mb-3 uppercase">
+                    Tomás Keymer Ovalle
+                  </p>
+                  <p className="text-left">
+                    Tomás Keymer Ovalle es arquitecto y Magíster en Arquitectura
+                    (MARQ) de la Pontificia Universidad Católica de Chile,
+                    titulado en 2021. Entre 2022 y 2025 trabajó en la oficina de
+                    Mathias Klotz, participando en proyectos de diversas
+                    escalas, como viviendas, hoteles y edificios públicos. Desde
+                    joven ha trabajado en construcción en madera en el sur de
+                    Chile, lo que le dio una relación directa con el oficio de
+                    la arquitectura y la carpintería. Esa experiencia temprana
+                    motivó su interés por proyectar y construir, entendiendo la
+                    arquitectura desde lo técnico y desde el vínculo con el
+                    lugar. Ha realizado ayudantías en el Taller 1 de
+                    Representación en la Escuela de Arquitectura de la
+                    Pontificia Universidad Católica de Chile.
                   </p>
                 </div>
-                <div className="mt-6">
-                  <img
-                    className="w-full md:w-1/2"
-                    src="/stefanorolla.webp"
-                    alt="stefanorolla"
-                  />
+              </div>
+
+              {/* Sanfuentes */}
+              <div className="flex flex-col justify-between">
+                <div>
+                  <p className="text-left mb-3 uppercase">
+                    Andrés Sanfuentes Urzúa
+                  </p>
+                  <p className="text-left">
+                    Andrés Sanfuentes Urzúa se tituló de arquitecto en la
+                    Pontificia Universidad Católica de Chile en el año 2021,
+                    donde también obtuvo el grado de Magíster en Arquitectura.
+                    En 2022 obtuvo el primer lugar en un concurso para un
+                    edificio universitario, en colaboración con la oficina
+                    Aguiló Pedraza. Entre 2022 y 2025 integró el equipo de Max
+                    Núñez Arquitectos, participando en el desarrollo de
+                    viviendas unifamiliares, edificios públicos, hoteles y
+                    espacios colectivos, abordando temáticas como arquitectura,
+                    paisajismo e interiorismo. Paralelamente, ha desarrollado
+                    proyectos de forma independiente en el sur de Chile, con un
+                    enfoque centrado en la materialidad, el interiorismo y la
+                    relación entre la arquitectura y el paisaje.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
+
+          <div className="hidden lg:block lg:col-span-1"></div>
         </div>
       </section>
 
-      {/* Collaborators */}
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-3">
-        <div className="flex w-full justify-start col-span-1">
-          <p className="uppercase"></p>
-        </div>
-        <div className="grid grid-cols-1 gap-3 mb-40 lg:col-span-4">
-          <div className="flex flex-col text-left col-span-2 lg:col-span-1">
-            <p className="col-span-1 uppercase mb-1">Jefes de Proyecto</p>
-            <div className="flex flex-col md:flex-row  gap-1">
-              <p className="uppercase">Carlos Rosas </p>
-              <p>/ Arquitecto Universidad Diego Portales</p>
-            </div>
-            <div className="flex flex-col md:flex-row  gap-1">
-              <p className="uppercase">Fabián Leiva</p>
-              <p>/ Arquitecto Universidad de Chile</p>
-            </div>
-          </div>
-          <div className="flex flex-col text-left col-span-2 lg:col-span-1 mt-3">
-            <p className="col-span-1 uppercase mb-1">Arquitectos</p>
-            <div className="flex flex-col md:flex-row  gap-1">
-              <p className="uppercase">Tomás Montero</p>
-              <p>/ Arquitecto Universidad Diego Portales</p>
-            </div>
-          </div>
-          <div className="flex flex-col text-left col-span-2 lg:col-span-1 mt-3">
-            <p className="col-span-1 uppercase mb-1">Practicantes</p>
-            <div className="flex flex-col md:flex-row  gap-1">
-              <p className="uppercase">Emilia Henríquez</p>
-              <p>/ Arquitecto Universidad de Chile</p>
-            </div>
-            <div className="flex flex-col md:flex-row  gap-1">
-              <p className="uppercase">Ben Brinckmann</p>
-              <p>/ Arquitecto Universidad de Mendrisio</p>
-            </div>
-          </div>
-          <div className="flex flex-col text-left col-span-2 lg:col-span-1 mt-3">
-            <p className="col-span-1 uppercase mb-1">Administración</p>
-            <div className="flex flex-col md:flex-row  gap-1">
-              <p className="uppercase">Isabel Muzzo</p>
-              <p>/ Ingeniero Comercial Universidad de los Andes</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Créditos */}
       <section className="flex col-span-3 lg:grid lg:grid-cols-5 mb-12 lg:mb-6 text-[#adadad] ">
-        <div className="col-span-1 "></div>
+        <div className="col-span-1 uppercase text-left">Créditos</div>
         <div className="text-left col-span-4">
           <a
-            className="hover:text-[#242424]"
+            className="hover:text-[#000000]"
             href="https://www.instagram.com/fffvbo/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Desarrollo web: Fabian Leiva
+            Website: Fabián Leiva
           </a>
         </div>
       </section>
