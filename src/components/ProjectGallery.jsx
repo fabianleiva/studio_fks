@@ -3,10 +3,8 @@ import { useState, useEffect, useContext, useRef } from "react";
 import { ApiContext } from "../context/ApiContext.jsx";
 import { SlArrowLeft } from "react-icons/sl";
 import { SlArrowRight } from "react-icons/sl";
-import { RxDoubleArrowRight } from "react-icons/rx";
-import { FaPlus } from "react-icons/fa6";
 
-const ProjectGallery = () => {
+const ProjectGallery = ({ setCursorText }) => {
   const [project, setProject] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showInfo, setShowInfo] = useState(false);
@@ -15,6 +13,24 @@ const ProjectGallery = () => {
   const navigate = useNavigate();
   const infoPanelRef = useRef(null);
   const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    setCursorText(null); // limpia el texto del cursor al entrar
+
+    if (projects.length > 0) {
+      const foundProject = projects.find((e) => e.slug === projectSlug);
+      if (foundProject) {
+        setProject(foundProject);
+        setCurrentImageIndex(0);
+      }
+    }
+
+    const timer = setTimeout(() => setVisible(true), 500);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [projects, projectSlug]);
 
   useEffect(() => {
     if (projects.length > 0) {
@@ -55,64 +71,46 @@ const ProjectGallery = () => {
     }
   };
 
-  const handleNextProject = () => {
-    if (projects.length > 0) {
-      const filteredProjects = projects.filter(
-        (p) => p.acf.project_filter === "destacado"
-      );
-      const currentIndex = filteredProjects.findIndex(
-        (p) => p.slug === projectSlug
-      );
-      if (currentIndex !== -1) {
-        const nextIndex = (currentIndex + 1) % filteredProjects.length;
-        const basePath = window.location.pathname.includes("/selected/")
-          ? "/projects/selected/"
-          : "/projects/";
-        navigate(`${basePath}${filteredProjects[nextIndex].slug}`);
-      }
-    }
-  };
-
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        infoPanelRef.current &&
-        !infoPanelRef.current.contains(event.target)
-      ) {
-        setShowInfo(false);
-      }
+    const handleClickAnywhere = () => {
+      setShowInfo(false);
     };
 
     if (showInfo) {
-      document.addEventListener("click", handleClickOutside);
+      document.addEventListener("click", handleClickAnywhere);
     }
 
     return () => {
-      document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener("click", handleClickAnywhere);
     };
   }, [showInfo]);
 
   const projectDetails = project
     ? [
-        { label: "Arquitectura", value: project.acf.architects },
         {
-          label: "Arquitecto Asociado",
-          value: project.acf.associate_architect,
+          label: "Arquitectura",
+          value: project.acf.architects,
         },
-        { label: "Arquitectos a cargo", value: project.acf.lead_architects },
+        {
+          label: "Arquitectos Asociados",
+          value: project.acf.associate_architects,
+        },
         { label: "Equipo", value: project.acf.team },
         { label: "Ubicación", value: project.acf.location },
-        { label: "Año", value: project.acf.year },
-        { label: "Superficie", value: project.acf.surface },
         { label: "Cliente", value: project.acf.client },
+        { label: "Superficie", value: project.acf.surface },
+        { label: "Año", value: project.acf.year },
       ]
     : [];
+
+  const surface = project?.acf.surface;
+  const location = project?.acf.location;
 
   return (
     <main>
       <div
         id="desktop"
-        className="w-screen h-[100dvh] flex flex-col justify-center items-center overflow-hidden relative hidden md:block"
+        className="w-screen h-[100dvh] flex flex-col justify-center items-center overflow-hidden relative hidden md:block page-fade-in"
       >
         {project && (
           <>
@@ -121,7 +119,7 @@ const ProjectGallery = () => {
                 className="w-1/2 h-full relative group"
                 onClick={handlePrevImage}
               >
-                <span className="absolute top-1/2 left-4 transform -translate-y-1/2 text-[#242424] text-2xl opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="absolute top-1/2 left-4 transform -translate-y-1/2 text-[#000000] text-2xl opacity-0 group-hover:opacity-100 transition-opacity">
                   <SlArrowLeft />
                 </span>
               </div>
@@ -129,7 +127,7 @@ const ProjectGallery = () => {
                 className="w-1/2 h-full relative group"
                 onClick={handleNextImage}
               >
-                <span className="absolute top-1/2 right-4 transform -translate-y-1/2 text-[#242424] text-2xl opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="absolute top-1/2 right-4 transform -translate-y-1/2 text-[#000000] text-2xl opacity-0 group-hover:opacity-100 transition-opacity">
                   <SlArrowRight />
                 </span>
               </div>
@@ -137,7 +135,7 @@ const ProjectGallery = () => {
 
             <div className="flex justify-center items-center w-full h-full pointer-events-none">
               <img
-                className="h-[60vh] w-auto object-contain"
+                className="h-[70vh] max-w-[60vw] object-contain"
                 src={
                   Object.values(project.acf.project_images).filter(
                     (img) => img
@@ -148,48 +146,76 @@ const ProjectGallery = () => {
               />
             </div>
 
-            <p
-              onClick={(e) => {
-                e.stopPropagation();
-                setShowInfo((prev) => !prev);
-              }}
-              className={`absolute bottom-0 left-0 p-3 text-base z-10 uppercase flex items-center gap-1 ${
-                showInfo
-                  ? "text-[#fafafa] hover:text-[#adadad]"
-                  : "text-[#adadad] hover:text-[#242424]"
-              }`}
-            >
-              {showInfo ? (
-                "Cerrar"
-              ) : (
+            <>
+              {!showInfo && (
                 <>
-                  {project.acf.project_title}
-                  <FaPlus className="inline-block text-md" />
+                  {/* Nombre fijo abajo a la izquierda */}
+                  <span
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowInfo(true);
+                    }}
+                    className="absolute bottom-0 left-0 p-5 text-lg font-work-sans z-10 text-[#000000] hover:text-[#848484]"
+                  >
+                    {project.acf.project_title}
+                  </span>
+
+                  {/* Superficie fijo centrado abajo */}
+                  {surface && surface !== "-" && (
+                    <span
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowInfo(true);
+                      }}
+                      className="absolute bottom-0 left-1/2 transform -translate-x-1/2 p-5 text-lg font-work-sans z-10 text-[#000000] hover:text-[#848484]"
+                    >
+                      {surface}
+                    </span>
+                  )}
+
+                  {/* Ubicación fijo abajo a la derecha */}
+                  {location && location !== "-" && (
+                    <span
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowInfo(true);
+                      }}
+                      className="absolute bottom-0 right-0 p-5 text-lg font-work-sans z-10 text-[#000000] hover:text-[#848484]"
+                    >
+                      {location}
+                    </span>
+                  )}
                 </>
               )}
-            </p>
 
-            <p
-              onClick={handleNextProject}
-              className={`flex absolute bottom-0 right-0 p-3 text-[#adadad] hover:text-[#242424] z-10 text-2xl group ${
-                showInfo ? "hidden" : ""
-              }`}
-            >
-              <RxDoubleArrowRight />
-            </p>
+              {/* Botón cerrar cuando el panel está abierto */}
+              {showInfo && (
+                <span
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowInfo(false);
+                  }}
+                  className="absolute bottom-0 left-0 p-5 text-lg font-work-sans z-10 text-[#000000] hover:text-[#adadad]"
+                >
+                  Cerrar
+                </span>
+              )}
+            </>
 
             <div
               ref={infoPanelRef}
-              className={`fixed bottom-0 left-0 w-full bg-[#242424] justify-between opacity-90 text-[#fafafa] flex flex-col md:grid md:grid-cols-2 md:gap-3 transform transition-transform duration-300 ease-in-out  ${
-                showInfo ? "translate-y-0" : "translate-y-full"
+              className={`fixed bottom-0 left-0 w-full bg-[#fafafa] justify-between text-[#000000] flex flex-col md:grid md:grid-cols-2 md:gap-3 transition-opacity duration-300 ease-in-out tracking-wider ${
+                showInfo
+                  ? "opacity-100 pointer-events-auto"
+                  : "opacity-0 pointer-events-none"
               }`}
-              style={{ height: "80vh", zIndex: 9 }}
+              style={{ height: "85vh", zIndex: 9 }}
             >
-              <div className="w-full text-sm 2xl:text-base p-3 text-left md:col-span-1 ">
+              <div className="w-full text-sm xl:text-lg p-5 text-left md:col-span-1 font-work-sans">
                 {project.acf.summary}
               </div>
 
-              <div className="max-w-[45vw] lg:max-w-[35vw] xl:max-w-[25vw] ml-auto text-sm 2xl:text-base p-3 text-right md:col-span-1 ">
+              <div className="max-w-[45vw] lg:max-w-[35vw] xl:max-w-[45vw] ml-auto text-sm xl:text-lg p-5 text-right md:col-span-1 font-work-sans">
                 {projectDetails
                   .filter(({ value }) => value && value !== "-") // Filtra los valores "-" o vacíos
                   .map(({ label, value }) => (
@@ -204,7 +230,7 @@ const ProjectGallery = () => {
       </div>
       <div
         id="mobile"
-        className={`md:hidden mt-[20vh] ${
+        className={`md:hidden pt-[20vh] page-fade-in ${
           visible ? "opacity-100" : "opacity-0"
         }`}
       >
@@ -215,17 +241,17 @@ const ProjectGallery = () => {
               .map((img, index) => (
                 <img
                   key={index}
-                  className="w-full object-cover px-3 pb-3"
+                  className="w-full object-cover px-5 pb-5"
                   src={img}
                   alt={`Image ${index + 1}`}
                   loading="lazy"
                 />
               ))}
         </div>
-        <div className="w-full bg-[#242424] text-[#fafafa] p-3 text-left flex flex-col py-6">
-          <h3 className="mb-3">{project?.acf.project_title}</h3>
+        <div className="w-full bg-[#fafafa] text-[#000000] p-5 text-left flex flex-col py-6">
+          <h3 className="mb-5">{project?.acf.project_title}</h3>
           <p>{project?.acf.summary}</p>
-          <div className="mt-6">
+          <div className="mt-5">
             {projectDetails
               .filter(({ value }) => value && value !== "-") // Filtra los valores "-" o vacíos
               .map(({ label, value }) => (
