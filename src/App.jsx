@@ -1,35 +1,39 @@
-import { Route, Routes, Navigate } from "react-router-dom";
+import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
 import Home from "./views/Home";
 import Projects from "./views/Projects";
 import ProjectGallery from "./components/ProjectGallery";
 import Office from "./views/Office";
-import Media from "./views/Media";
 import Contact from "./views/Contact";
 import NotFound from "./views/NotFound";
 import "./App.css";
 import "animate.css";
 import { ParallaxProvider } from "react-scroll-parallax";
 import CustomCursor from "./components/CustomCursor";
+import { useLenis } from "./hooks/useLenis";
 
 function App() {
+  useLenis();
+
+  const [cursorText, setCursorText] = useState(null); // <--- agregado aquí
+
   return (
-    <>
-      <ParallaxProvider>
-        <NavigationBar />
-        <CustomCursor />
-        <Routes>
-          <Route path="/" element={<Navigate to="/home" replace />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/projects/:projectSlug" element={<ProjectGallery />} />
-          <Route path="/media/:mediaState" element={<Media />} />
-          <Route path="/office" element={<Office />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </ParallaxProvider>
-    </>
+    <ParallaxProvider>
+      <CustomCursor label={cursorText} />
+      <NavigationBar />
+      <Routes>
+        <Route path="/" element={<Home setCursorText={setCursorText} />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route
+          path="/:projectSlug"
+          element={<ProjectGallery setCursorText={setCursorText} />}
+        />
+        <Route path="/office" element={<Office />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </ParallaxProvider>
   );
 }
 
