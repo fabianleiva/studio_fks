@@ -15,7 +15,7 @@ const Publications = () => {
   }, []);
 
   return (
-    <main className="mt-[20vh]  mb-40">
+    <main className="pt-[20vh]  mb-40">
       <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-x-3 gap-y-12 md:gap-y-24">
         {publications.map((item) => (
           <div key={item.id} className="flex flex-col h-full">
