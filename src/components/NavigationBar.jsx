@@ -12,11 +12,11 @@ const NavigationBar = () => {
       <header>
         <nav className="fixed top-0 left-0 z-[100] p-5 w-full font-work-sans tracking-tight font-medium">
           {/* Desktop Menu (siempre visible, también en mobile) */}
-          <div className="grid grid-cols-[2fr_1fr_2fr] gap-5 items-center text-left">
+          <div className="grid items-center gap-5 grid-cols-[1fr_auto] lg:grid-cols-[1fr_1fr]">
             <div className="flex justify-start">
               <NavLink
                 to="/"
-                className="text-3xl font-work-sans tracking-tight flex items-center duration-200 group"
+                className="text-3xl font-work-sans tracking-tight flex items-center duration-200 group whitespace-nowrap"
               >
                 <div className="flex items-center transition-colors group-hover:text-[#848484]">
                   studio fks
@@ -25,7 +25,6 @@ const NavigationBar = () => {
               </NavLink>
             </div>
 
-            <div></div>
 
             <div className="hidden lg:flex justify-end text-lg">
               <NavLink
@@ -84,7 +83,7 @@ const NavigationBar = () => {
 
         {/* Menú flotante mobile */}
         <div
-          className={`lg:hidden fixed top-[80px] left-0 right-0 bottom-0 bg-[#fafafa] z-40 flex flex-col items-center justify-center transition-opacity duration-500 ${
+          className={`lg:hidden fixed inset-0 bg-[#fafafa] z-[90] flex flex-col items-center justify-center transition-opacity duration-500 ${
             showInfoText
               ? "opacity-100 pointer-events-auto"
               : "opacity-0 pointer-events-none"
