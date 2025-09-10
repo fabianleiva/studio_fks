@@ -158,9 +158,9 @@ const Office = () => {
       </section>
 
       {/* Créditos */}
-      <section className="flex col-span-3 lg:grid lg:grid-cols-5 mb-12 lg:mb-6 text-[#adadad] ">
-        <div className="col-span-1 uppercase text-left">Créditos</div>
-        <div className="text-left col-span-4">
+      <section className="grid grid-cols-1 lg:grid-cols-5 gap-2 mb-12 lg:mb-6 text-[#adadad]">
+        <div className="uppercase text-left">Créditos</div>
+        <div className="text-left lg:col-span-4">
           <a
             className="hover:text-[#000000]"
             href="https://www.instagram.com/fffvbo/"
