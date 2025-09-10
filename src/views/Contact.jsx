@@ -22,7 +22,7 @@ const Contact = () => {
               className="flex items-center text-[#adadad] hover:text-[#000000]"
             >
               <FaInstagram className="text-lg mr-1" />
-              fks_aa
+              studiofks_
             </a>
           </div>
         </div>
